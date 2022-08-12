@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "issuemanage",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/home/tamutamu/r/DEV/aws/amplify/amplify-nextjs-issue-manage/amplify/backend/api/issuemanage/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authissuemanage3ff722e2"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
+  }
+}
