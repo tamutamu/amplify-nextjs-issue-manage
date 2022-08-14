@@ -54,7 +54,7 @@ export default async function handler(
     const postInput = {
       mutation: gql(createTicket),
       variables: {
-        input: req.body,
+        input: { ...req.body, owner: "tamura" },
       },
     };
     const res = await graphqlClient.mutate(postInput);

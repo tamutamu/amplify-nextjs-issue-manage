@@ -10,37 +10,11 @@ export const getTicket = /* GraphQL */ `
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          post {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
+      owner
       startDatetime
       endDatetime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -65,34 +39,11 @@ export const listTickets = /* GraphQL */ `
         content
         coverImage
         status
-        comments {
-          items {
-            id
-            content
-            post {
-              id
-              title
-              content
-              coverImage
-              status
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
+        owner
         startDatetime
         endDatetime
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -103,45 +54,8 @@ export const getComment = /* GraphQL */ `
     getComment(id: $id) {
       id
       content
-      post {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            post {
-              id
-              title
-              content
-              coverImage
-              status
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        owner
-      }
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
     }
   }
 `;
@@ -163,33 +77,8 @@ export const listComments = /* GraphQL */ `
       items {
         id
         content
-        post {
-          id
-          title
-          content
-          coverImage
-          status
-          comments {
-            items {
-              id
-              content
-              createdAt
-              updatedAt
-              ticketCommentsId
-              owner
-            }
-            nextToken
-          }
-          startDatetime
-          endDatetime
-          createdAt
-          updatedAt
-          owner
-        }
         createdAt
         updatedAt
-        ticketCommentsId
-        owner
       }
       nextToken
     }

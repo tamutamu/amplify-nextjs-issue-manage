@@ -3,269 +3,80 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateTicket = /* GraphQL */ `
-  subscription OnCreateTicket($owner: String) {
-    onCreateTicket(owner: $owner) {
+  subscription OnCreateTicket {
+    onCreateTicket {
       id
       title
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          post {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
+      owner
       startDatetime
       endDatetime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateTicket = /* GraphQL */ `
-  subscription OnUpdateTicket($owner: String) {
-    onUpdateTicket(owner: $owner) {
+  subscription OnUpdateTicket {
+    onUpdateTicket {
       id
       title
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          post {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
+      owner
       startDatetime
       endDatetime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteTicket = /* GraphQL */ `
-  subscription OnDeleteTicket($owner: String) {
-    onDeleteTicket(owner: $owner) {
+  subscription OnDeleteTicket {
+    onDeleteTicket {
       id
       title
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          post {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
+      owner
       startDatetime
       endDatetime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment($owner: String) {
-    onCreateComment(owner: $owner) {
+  subscription OnCreateComment {
+    onCreateComment {
       id
       content
-      post {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            post {
-              id
-              title
-              content
-              coverImage
-              status
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        owner
-      }
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
     }
   }
 `;
 export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment($owner: String) {
-    onUpdateComment(owner: $owner) {
+  subscription OnUpdateComment {
+    onUpdateComment {
       id
       content
-      post {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            post {
-              id
-              title
-              content
-              coverImage
-              status
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        owner
-      }
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
     }
   }
 `;
 export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment($owner: String) {
-    onDeleteComment(owner: $owner) {
+  subscription OnDeleteComment {
+    onDeleteComment {
       id
       content
-      post {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            post {
-              id
-              title
-              content
-              coverImage
-              status
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        owner
-      }
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
     }
   }
 `;

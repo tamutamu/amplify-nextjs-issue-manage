@@ -13,37 +13,11 @@ export const createTicket = /* GraphQL */ `
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          post {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
+      owner
       startDatetime
       endDatetime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -58,37 +32,11 @@ export const updateTicket = /* GraphQL */ `
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          post {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
+      owner
       startDatetime
       endDatetime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -103,37 +51,11 @@ export const deleteTicket = /* GraphQL */ `
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          post {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
+      owner
       startDatetime
       endDatetime
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -145,45 +67,8 @@ export const createComment = /* GraphQL */ `
     createComment(input: $input, condition: $condition) {
       id
       content
-      post {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            post {
-              id
-              title
-              content
-              coverImage
-              status
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        owner
-      }
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
     }
   }
 `;
@@ -195,45 +80,8 @@ export const updateComment = /* GraphQL */ `
     updateComment(input: $input, condition: $condition) {
       id
       content
-      post {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            post {
-              id
-              title
-              content
-              coverImage
-              status
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        owner
-      }
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
     }
   }
 `;
@@ -245,45 +93,8 @@ export const deleteComment = /* GraphQL */ `
     deleteComment(input: $input, condition: $condition) {
       id
       content
-      post {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            post {
-              id
-              title
-              content
-              coverImage
-              status
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        owner
-      }
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
     }
   }
 `;

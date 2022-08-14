@@ -11,8 +11,11 @@ type Ticket
   @model
   @auth(
     rules: [
-      { allow: public, provider: iam, operations: [read] }
-      { allow: owner, operations: [create, update, delete, read] }
+      {
+        allow: private
+        provider: iam
+        operations: [create, update, delete, read]
+      }
     ]
   ) {
   id: ID! @primaryKey
@@ -20,7 +23,7 @@ type Ticket
   content: String!
   coverImage: String
   status: TicketStatus!
-  comments: [Comment] @hasMany
+  owner: String
   startDatetime: AWSDateTime
   endDatetime: AWSDateTime
 }
@@ -29,11 +32,13 @@ type Comment
   @model
   @auth(
     rules: [
-      { allow: public, provider: iam, operations: [read] }
-      { allow: owner, operations: [create, update, delete, read] }
+      {
+        allow: private
+        provider: iam
+        operations: [create, update, delete, read]
+      }
     ]
   ) {
   id: ID! @primaryKey
   content: String!
-  post: Ticket @belongsTo
 }
