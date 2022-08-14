@@ -1,9 +1,41 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { API, Auth } from "aws-amplify";
+import type { NextPage } from "next";
+import Head from "next/head";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { ListTicketsQuery, Ticket } from "../src/API";
+import { listTickets } from "../src/graphql/queries";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
+  const [tickets, setTickets] = useState<Ticket[]>([]);
+  useEffect(() => {
+    fetchTickets();
+  }, []);
+
+  async function fetchTickets() {
+    const { username } = await Auth.currentAuthenticatedUser();
+    const result = await API.graphql({
+      query: listTickets,
+    });
+
+    if ("data" in result && result.data) {
+      const items = result.data as ListTicketsQuery;
+      items.listTickets && setTickets(items.listTickets.items as Ticket[]);
+    }
+
+    // //Fetch images from S3 for posts that contain a cover image
+    // const postsWithImages = await Promise.all(
+    //   items.map(async (post) => {
+    //     if (post.coverImage) {
+    //       post.coverImage = await Storage.get(post.coverImage);
+    //     }
+    //     return post;
+    //   })
+    // );
+    // setPosts(postsWithImages);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,60 +45,33 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h1 className={styles.title}>Manage issue</h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
+        {[
+          ["Home", "/"],
+          ["Create Ticket", "/ticket/create"],
+        ].map(([title, url], index) => (
+          <div key={index} className={styles.description}>
+            <Link href={url}>
+              <a className=""> {title}</a>
+            </Link>
+          </div>
+        ))}
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div>
+          {tickets.map((item) => {
+            return (
+              <div key={item.id}>
+                <h4>{item.title}</h4>
+              </div>
+            );
+          })}
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <footer className={styles.footer}></footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

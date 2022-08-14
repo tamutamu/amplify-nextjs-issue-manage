@@ -4,7 +4,9 @@
 
 export type CreateTicketInput = {
   id?: string | null,
+  title: string,
   content: string,
+  coverImage?: string | null,
   status: TicketStatus,
   startDatetime?: string | null,
   endDatetime?: string | null,
@@ -18,7 +20,9 @@ export enum TicketStatus {
 
 
 export type ModelTicketConditionInput = {
+  title?: ModelStringInput | null,
   content?: ModelStringInput | null,
+  coverImage?: ModelStringInput | null,
   status?: ModelTicketStatusInput | null,
   startDatetime?: ModelStringInput | null,
   endDatetime?: ModelStringInput | null,
@@ -75,13 +79,16 @@ export type ModelTicketStatusInput = {
 export type Ticket = {
   __typename: "Ticket",
   id: string,
+  title: string,
   content: string,
+  coverImage?: string | null,
   status: TicketStatus,
   comments?: ModelCommentConnection | null,
   startDatetime?: string | null,
   endDatetime?: string | null,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type ModelCommentConnection = {
@@ -98,11 +105,14 @@ export type Comment = {
   createdAt: string,
   updatedAt: string,
   ticketCommentsId?: string | null,
+  owner?: string | null,
 };
 
 export type UpdateTicketInput = {
   id: string,
+  title?: string | null,
   content?: string | null,
+  coverImage?: string | null,
   status?: TicketStatus | null,
   startDatetime?: string | null,
   endDatetime?: string | null,
@@ -154,7 +164,9 @@ export type DeleteCommentInput = {
 
 export type ModelTicketFilterInput = {
   id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
   content?: ModelStringInput | null,
+  coverImage?: ModelStringInput | null,
   status?: ModelTicketStatusInput | null,
   startDatetime?: ModelStringInput | null,
   endDatetime?: ModelStringInput | null,
@@ -193,7 +205,9 @@ export type CreateTicketMutation = {
   createTicket?:  {
     __typename: "Ticket",
     id: string,
+    title: string,
     content: string,
+    coverImage?: string | null,
     status: TicketStatus,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -204,7 +218,9 @@ export type CreateTicketMutation = {
         post?:  {
           __typename: "Ticket",
           id: string,
+          title: string,
           content: string,
+          coverImage?: string | null,
           status: TicketStatus,
           comments?:  {
             __typename: "ModelCommentConnection",
@@ -214,10 +230,12 @@ export type CreateTicketMutation = {
           endDatetime?: string | null,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
         } | null,
         createdAt: string,
         updatedAt: string,
         ticketCommentsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -225,6 +243,7 @@ export type CreateTicketMutation = {
     endDatetime?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -237,7 +256,9 @@ export type UpdateTicketMutation = {
   updateTicket?:  {
     __typename: "Ticket",
     id: string,
+    title: string,
     content: string,
+    coverImage?: string | null,
     status: TicketStatus,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -248,7 +269,9 @@ export type UpdateTicketMutation = {
         post?:  {
           __typename: "Ticket",
           id: string,
+          title: string,
           content: string,
+          coverImage?: string | null,
           status: TicketStatus,
           comments?:  {
             __typename: "ModelCommentConnection",
@@ -258,10 +281,12 @@ export type UpdateTicketMutation = {
           endDatetime?: string | null,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
         } | null,
         createdAt: string,
         updatedAt: string,
         ticketCommentsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -269,6 +294,7 @@ export type UpdateTicketMutation = {
     endDatetime?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -281,7 +307,9 @@ export type DeleteTicketMutation = {
   deleteTicket?:  {
     __typename: "Ticket",
     id: string,
+    title: string,
     content: string,
+    coverImage?: string | null,
     status: TicketStatus,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -292,7 +320,9 @@ export type DeleteTicketMutation = {
         post?:  {
           __typename: "Ticket",
           id: string,
+          title: string,
           content: string,
+          coverImage?: string | null,
           status: TicketStatus,
           comments?:  {
             __typename: "ModelCommentConnection",
@@ -302,10 +332,12 @@ export type DeleteTicketMutation = {
           endDatetime?: string | null,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
         } | null,
         createdAt: string,
         updatedAt: string,
         ticketCommentsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -313,6 +345,7 @@ export type DeleteTicketMutation = {
     endDatetime?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -329,7 +362,9 @@ export type CreateCommentMutation = {
     post?:  {
       __typename: "Ticket",
       id: string,
+      title: string,
       content: string,
+      coverImage?: string | null,
       status: TicketStatus,
       comments?:  {
         __typename: "ModelCommentConnection",
@@ -340,16 +375,20 @@ export type CreateCommentMutation = {
           post?:  {
             __typename: "Ticket",
             id: string,
+            title: string,
             content: string,
+            coverImage?: string | null,
             status: TicketStatus,
             startDatetime?: string | null,
             endDatetime?: string | null,
             createdAt: string,
             updatedAt: string,
+            owner?: string | null,
           } | null,
           createdAt: string,
           updatedAt: string,
           ticketCommentsId?: string | null,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -357,10 +396,12 @@ export type CreateCommentMutation = {
       endDatetime?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
     ticketCommentsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -377,7 +418,9 @@ export type UpdateCommentMutation = {
     post?:  {
       __typename: "Ticket",
       id: string,
+      title: string,
       content: string,
+      coverImage?: string | null,
       status: TicketStatus,
       comments?:  {
         __typename: "ModelCommentConnection",
@@ -388,16 +431,20 @@ export type UpdateCommentMutation = {
           post?:  {
             __typename: "Ticket",
             id: string,
+            title: string,
             content: string,
+            coverImage?: string | null,
             status: TicketStatus,
             startDatetime?: string | null,
             endDatetime?: string | null,
             createdAt: string,
             updatedAt: string,
+            owner?: string | null,
           } | null,
           createdAt: string,
           updatedAt: string,
           ticketCommentsId?: string | null,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -405,10 +452,12 @@ export type UpdateCommentMutation = {
       endDatetime?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
     ticketCommentsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -425,7 +474,9 @@ export type DeleteCommentMutation = {
     post?:  {
       __typename: "Ticket",
       id: string,
+      title: string,
       content: string,
+      coverImage?: string | null,
       status: TicketStatus,
       comments?:  {
         __typename: "ModelCommentConnection",
@@ -436,16 +487,20 @@ export type DeleteCommentMutation = {
           post?:  {
             __typename: "Ticket",
             id: string,
+            title: string,
             content: string,
+            coverImage?: string | null,
             status: TicketStatus,
             startDatetime?: string | null,
             endDatetime?: string | null,
             createdAt: string,
             updatedAt: string,
+            owner?: string | null,
           } | null,
           createdAt: string,
           updatedAt: string,
           ticketCommentsId?: string | null,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -453,10 +508,12 @@ export type DeleteCommentMutation = {
       endDatetime?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
     ticketCommentsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -468,7 +525,9 @@ export type GetTicketQuery = {
   getTicket?:  {
     __typename: "Ticket",
     id: string,
+    title: string,
     content: string,
+    coverImage?: string | null,
     status: TicketStatus,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -479,7 +538,9 @@ export type GetTicketQuery = {
         post?:  {
           __typename: "Ticket",
           id: string,
+          title: string,
           content: string,
+          coverImage?: string | null,
           status: TicketStatus,
           comments?:  {
             __typename: "ModelCommentConnection",
@@ -489,10 +550,12 @@ export type GetTicketQuery = {
           endDatetime?: string | null,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
         } | null,
         createdAt: string,
         updatedAt: string,
         ticketCommentsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -500,6 +563,7 @@ export type GetTicketQuery = {
     endDatetime?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -517,7 +581,9 @@ export type ListTicketsQuery = {
     items:  Array< {
       __typename: "Ticket",
       id: string,
+      title: string,
       content: string,
+      coverImage?: string | null,
       status: TicketStatus,
       comments?:  {
         __typename: "ModelCommentConnection",
@@ -528,16 +594,20 @@ export type ListTicketsQuery = {
           post?:  {
             __typename: "Ticket",
             id: string,
+            title: string,
             content: string,
+            coverImage?: string | null,
             status: TicketStatus,
             startDatetime?: string | null,
             endDatetime?: string | null,
             createdAt: string,
             updatedAt: string,
+            owner?: string | null,
           } | null,
           createdAt: string,
           updatedAt: string,
           ticketCommentsId?: string | null,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -545,6 +615,7 @@ export type ListTicketsQuery = {
       endDatetime?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -562,7 +633,9 @@ export type GetCommentQuery = {
     post?:  {
       __typename: "Ticket",
       id: string,
+      title: string,
       content: string,
+      coverImage?: string | null,
       status: TicketStatus,
       comments?:  {
         __typename: "ModelCommentConnection",
@@ -573,16 +646,20 @@ export type GetCommentQuery = {
           post?:  {
             __typename: "Ticket",
             id: string,
+            title: string,
             content: string,
+            coverImage?: string | null,
             status: TicketStatus,
             startDatetime?: string | null,
             endDatetime?: string | null,
             createdAt: string,
             updatedAt: string,
+            owner?: string | null,
           } | null,
           createdAt: string,
           updatedAt: string,
           ticketCommentsId?: string | null,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -590,10 +667,12 @@ export type GetCommentQuery = {
       endDatetime?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
     ticketCommentsId?: string | null,
+    owner?: string | null,
   } | null,
 };
 
@@ -615,7 +694,9 @@ export type ListCommentsQuery = {
       post?:  {
         __typename: "Ticket",
         id: string,
+        title: string,
         content: string,
+        coverImage?: string | null,
         status: TicketStatus,
         comments?:  {
           __typename: "ModelCommentConnection",
@@ -626,6 +707,7 @@ export type ListCommentsQuery = {
             createdAt: string,
             updatedAt: string,
             ticketCommentsId?: string | null,
+            owner?: string | null,
           } | null >,
           nextToken?: string | null,
         } | null,
@@ -633,20 +715,28 @@ export type ListCommentsQuery = {
         endDatetime?: string | null,
         createdAt: string,
         updatedAt: string,
+        owner?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
       ticketCommentsId?: string | null,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
+};
+
+export type OnCreateTicketSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateTicketSubscription = {
   onCreateTicket?:  {
     __typename: "Ticket",
     id: string,
+    title: string,
     content: string,
+    coverImage?: string | null,
     status: TicketStatus,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -657,7 +747,9 @@ export type OnCreateTicketSubscription = {
         post?:  {
           __typename: "Ticket",
           id: string,
+          title: string,
           content: string,
+          coverImage?: string | null,
           status: TicketStatus,
           comments?:  {
             __typename: "ModelCommentConnection",
@@ -667,10 +759,12 @@ export type OnCreateTicketSubscription = {
           endDatetime?: string | null,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
         } | null,
         createdAt: string,
         updatedAt: string,
         ticketCommentsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -678,14 +772,21 @@ export type OnCreateTicketSubscription = {
     endDatetime?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateTicketSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateTicketSubscription = {
   onUpdateTicket?:  {
     __typename: "Ticket",
     id: string,
+    title: string,
     content: string,
+    coverImage?: string | null,
     status: TicketStatus,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -696,7 +797,9 @@ export type OnUpdateTicketSubscription = {
         post?:  {
           __typename: "Ticket",
           id: string,
+          title: string,
           content: string,
+          coverImage?: string | null,
           status: TicketStatus,
           comments?:  {
             __typename: "ModelCommentConnection",
@@ -706,10 +809,12 @@ export type OnUpdateTicketSubscription = {
           endDatetime?: string | null,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
         } | null,
         createdAt: string,
         updatedAt: string,
         ticketCommentsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -717,14 +822,21 @@ export type OnUpdateTicketSubscription = {
     endDatetime?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteTicketSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteTicketSubscription = {
   onDeleteTicket?:  {
     __typename: "Ticket",
     id: string,
+    title: string,
     content: string,
+    coverImage?: string | null,
     status: TicketStatus,
     comments?:  {
       __typename: "ModelCommentConnection",
@@ -735,7 +847,9 @@ export type OnDeleteTicketSubscription = {
         post?:  {
           __typename: "Ticket",
           id: string,
+          title: string,
           content: string,
+          coverImage?: string | null,
           status: TicketStatus,
           comments?:  {
             __typename: "ModelCommentConnection",
@@ -745,10 +859,12 @@ export type OnDeleteTicketSubscription = {
           endDatetime?: string | null,
           createdAt: string,
           updatedAt: string,
+          owner?: string | null,
         } | null,
         createdAt: string,
         updatedAt: string,
         ticketCommentsId?: string | null,
+        owner?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -756,7 +872,12 @@ export type OnDeleteTicketSubscription = {
     endDatetime?: string | null,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
+};
+
+export type OnCreateCommentSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateCommentSubscription = {
@@ -767,7 +888,9 @@ export type OnCreateCommentSubscription = {
     post?:  {
       __typename: "Ticket",
       id: string,
+      title: string,
       content: string,
+      coverImage?: string | null,
       status: TicketStatus,
       comments?:  {
         __typename: "ModelCommentConnection",
@@ -778,16 +901,20 @@ export type OnCreateCommentSubscription = {
           post?:  {
             __typename: "Ticket",
             id: string,
+            title: string,
             content: string,
+            coverImage?: string | null,
             status: TicketStatus,
             startDatetime?: string | null,
             endDatetime?: string | null,
             createdAt: string,
             updatedAt: string,
+            owner?: string | null,
           } | null,
           createdAt: string,
           updatedAt: string,
           ticketCommentsId?: string | null,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -795,11 +922,17 @@ export type OnCreateCommentSubscription = {
       endDatetime?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
     ticketCommentsId?: string | null,
+    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateCommentSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateCommentSubscription = {
@@ -810,7 +943,9 @@ export type OnUpdateCommentSubscription = {
     post?:  {
       __typename: "Ticket",
       id: string,
+      title: string,
       content: string,
+      coverImage?: string | null,
       status: TicketStatus,
       comments?:  {
         __typename: "ModelCommentConnection",
@@ -821,16 +956,20 @@ export type OnUpdateCommentSubscription = {
           post?:  {
             __typename: "Ticket",
             id: string,
+            title: string,
             content: string,
+            coverImage?: string | null,
             status: TicketStatus,
             startDatetime?: string | null,
             endDatetime?: string | null,
             createdAt: string,
             updatedAt: string,
+            owner?: string | null,
           } | null,
           createdAt: string,
           updatedAt: string,
           ticketCommentsId?: string | null,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -838,11 +977,17 @@ export type OnUpdateCommentSubscription = {
       endDatetime?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
     ticketCommentsId?: string | null,
+    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteCommentSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteCommentSubscription = {
@@ -853,7 +998,9 @@ export type OnDeleteCommentSubscription = {
     post?:  {
       __typename: "Ticket",
       id: string,
+      title: string,
       content: string,
+      coverImage?: string | null,
       status: TicketStatus,
       comments?:  {
         __typename: "ModelCommentConnection",
@@ -864,16 +1011,20 @@ export type OnDeleteCommentSubscription = {
           post?:  {
             __typename: "Ticket",
             id: string,
+            title: string,
             content: string,
+            coverImage?: string | null,
             status: TicketStatus,
             startDatetime?: string | null,
             endDatetime?: string | null,
             createdAt: string,
             updatedAt: string,
+            owner?: string | null,
           } | null,
           createdAt: string,
           updatedAt: string,
           ticketCommentsId?: string | null,
+          owner?: string | null,
         } | null >,
         nextToken?: string | null,
       } | null,
@@ -881,9 +1032,11 @@ export type OnDeleteCommentSubscription = {
       endDatetime?: string | null,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
     ticketCommentsId?: string | null,
+    owner?: string | null,
   } | null,
 };

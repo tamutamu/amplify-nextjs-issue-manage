@@ -9,7 +9,9 @@ export const createTicket = /* GraphQL */ `
   ) {
     createTicket(input: $input, condition: $condition) {
       id
+      title
       content
+      coverImage
       status
       comments {
         items {
@@ -17,7 +19,9 @@ export const createTicket = /* GraphQL */ `
           content
           post {
             id
+            title
             content
+            coverImage
             status
             comments {
               nextToken
@@ -26,10 +30,12 @@ export const createTicket = /* GraphQL */ `
             endDatetime
             createdAt
             updatedAt
+            owner
           }
           createdAt
           updatedAt
           ticketCommentsId
+          owner
         }
         nextToken
       }
@@ -37,6 +43,7 @@ export const createTicket = /* GraphQL */ `
       endDatetime
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -47,7 +54,9 @@ export const updateTicket = /* GraphQL */ `
   ) {
     updateTicket(input: $input, condition: $condition) {
       id
+      title
       content
+      coverImage
       status
       comments {
         items {
@@ -55,7 +64,9 @@ export const updateTicket = /* GraphQL */ `
           content
           post {
             id
+            title
             content
+            coverImage
             status
             comments {
               nextToken
@@ -64,10 +75,12 @@ export const updateTicket = /* GraphQL */ `
             endDatetime
             createdAt
             updatedAt
+            owner
           }
           createdAt
           updatedAt
           ticketCommentsId
+          owner
         }
         nextToken
       }
@@ -75,6 +88,7 @@ export const updateTicket = /* GraphQL */ `
       endDatetime
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -85,7 +99,9 @@ export const deleteTicket = /* GraphQL */ `
   ) {
     deleteTicket(input: $input, condition: $condition) {
       id
+      title
       content
+      coverImage
       status
       comments {
         items {
@@ -93,7 +109,9 @@ export const deleteTicket = /* GraphQL */ `
           content
           post {
             id
+            title
             content
+            coverImage
             status
             comments {
               nextToken
@@ -102,10 +120,12 @@ export const deleteTicket = /* GraphQL */ `
             endDatetime
             createdAt
             updatedAt
+            owner
           }
           createdAt
           updatedAt
           ticketCommentsId
+          owner
         }
         nextToken
       }
@@ -113,6 +133,7 @@ export const deleteTicket = /* GraphQL */ `
       endDatetime
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -126,7 +147,9 @@ export const createComment = /* GraphQL */ `
       content
       post {
         id
+        title
         content
+        coverImage
         status
         comments {
           items {
@@ -134,16 +157,20 @@ export const createComment = /* GraphQL */ `
             content
             post {
               id
+              title
               content
+              coverImage
               status
               startDatetime
               endDatetime
               createdAt
               updatedAt
+              owner
             }
             createdAt
             updatedAt
             ticketCommentsId
+            owner
           }
           nextToken
         }
@@ -151,10 +178,12 @@ export const createComment = /* GraphQL */ `
         endDatetime
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       ticketCommentsId
+      owner
     }
   }
 `;
@@ -168,7 +197,9 @@ export const updateComment = /* GraphQL */ `
       content
       post {
         id
+        title
         content
+        coverImage
         status
         comments {
           items {
@@ -176,16 +207,20 @@ export const updateComment = /* GraphQL */ `
             content
             post {
               id
+              title
               content
+              coverImage
               status
               startDatetime
               endDatetime
               createdAt
               updatedAt
+              owner
             }
             createdAt
             updatedAt
             ticketCommentsId
+            owner
           }
           nextToken
         }
@@ -193,10 +228,12 @@ export const updateComment = /* GraphQL */ `
         endDatetime
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       ticketCommentsId
+      owner
     }
   }
 `;
@@ -210,7 +247,9 @@ export const deleteComment = /* GraphQL */ `
       content
       post {
         id
+        title
         content
+        coverImage
         status
         comments {
           items {
@@ -218,16 +257,20 @@ export const deleteComment = /* GraphQL */ `
             content
             post {
               id
+              title
               content
+              coverImage
               status
               startDatetime
               endDatetime
               createdAt
               updatedAt
+              owner
             }
             createdAt
             updatedAt
             ticketCommentsId
+            owner
           }
           nextToken
         }
@@ -235,10 +278,12 @@ export const deleteComment = /* GraphQL */ `
         endDatetime
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       ticketCommentsId
+      owner
     }
   }
 `;

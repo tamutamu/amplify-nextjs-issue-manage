@@ -6,7 +6,9 @@ export const getTicket = /* GraphQL */ `
   query GetTicket($id: ID!) {
     getTicket(id: $id) {
       id
+      title
       content
+      coverImage
       status
       comments {
         items {
@@ -14,7 +16,9 @@ export const getTicket = /* GraphQL */ `
           content
           post {
             id
+            title
             content
+            coverImage
             status
             comments {
               nextToken
@@ -23,10 +27,12 @@ export const getTicket = /* GraphQL */ `
             endDatetime
             createdAt
             updatedAt
+            owner
           }
           createdAt
           updatedAt
           ticketCommentsId
+          owner
         }
         nextToken
       }
@@ -34,6 +40,7 @@ export const getTicket = /* GraphQL */ `
       endDatetime
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -54,7 +61,9 @@ export const listTickets = /* GraphQL */ `
     ) {
       items {
         id
+        title
         content
+        coverImage
         status
         comments {
           items {
@@ -62,16 +71,20 @@ export const listTickets = /* GraphQL */ `
             content
             post {
               id
+              title
               content
+              coverImage
               status
               startDatetime
               endDatetime
               createdAt
               updatedAt
+              owner
             }
             createdAt
             updatedAt
             ticketCommentsId
+            owner
           }
           nextToken
         }
@@ -79,6 +92,7 @@ export const listTickets = /* GraphQL */ `
         endDatetime
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -91,7 +105,9 @@ export const getComment = /* GraphQL */ `
       content
       post {
         id
+        title
         content
+        coverImage
         status
         comments {
           items {
@@ -99,16 +115,20 @@ export const getComment = /* GraphQL */ `
             content
             post {
               id
+              title
               content
+              coverImage
               status
               startDatetime
               endDatetime
               createdAt
               updatedAt
+              owner
             }
             createdAt
             updatedAt
             ticketCommentsId
+            owner
           }
           nextToken
         }
@@ -116,10 +136,12 @@ export const getComment = /* GraphQL */ `
         endDatetime
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       ticketCommentsId
+      owner
     }
   }
 `;
@@ -143,7 +165,9 @@ export const listComments = /* GraphQL */ `
         content
         post {
           id
+          title
           content
+          coverImage
           status
           comments {
             items {
@@ -152,6 +176,7 @@ export const listComments = /* GraphQL */ `
               createdAt
               updatedAt
               ticketCommentsId
+              owner
             }
             nextToken
           }
@@ -159,10 +184,12 @@ export const listComments = /* GraphQL */ `
           endDatetime
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
         ticketCommentsId
+        owner
       }
       nextToken
     }
