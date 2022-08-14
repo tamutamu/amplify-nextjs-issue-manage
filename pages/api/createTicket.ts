@@ -42,13 +42,13 @@ export default async function handler(
     console.log("END 0");
     // const { Auth, API } = withSSRContext({ req });
 
-    console.log("START 1");
-    await API.graphql({
-      query: createTicket,
-      variables: { input: req.body },
-      authMode: "AWS_IAM",
-    });
-    console.log("END 1");
+    // console.log("START 1");
+    // await API.graphql({
+    //   query: createTicket,
+    //   variables: { input: req.body },
+    //   authMode: "AWS_IAM",
+    // });
+    // console.log("END 1");
 
     console.log("START 2");
     const postInput = {

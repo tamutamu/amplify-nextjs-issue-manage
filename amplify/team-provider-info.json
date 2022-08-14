@@ -9,11 +9,18 @@
       "UnauthRoleName": "amplify-issuemanage-develop-13415-unauthRole",
       "StackName": "amplify-issuemanage-develop-13415",
       "StackId": "arn:aws:cloudformation:ap-northeast-1:123141636675:stack/amplify-issuemanage-develop-13415/9bd1ba40-1a5c-11ed-bd43-0e2be100531f",
-      "AmplifyAppId": "d1868sh9jmxszd"
+      "AmplifyAppId": "d1868sh9jmxszd",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-issuemanage-develop-13415-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "issuemanage3ff722e2": {}
+      },
+      "function": {
+        "issuemanagedf932920": {
+          "deploymentBucketName": "amplify-issuemanage-develop-13415-deployment",
+          "s3Key": "amplify-builds/issuemanagedf932920-2b396b33322b4d484d63-build.zip"
+        }
       }
     }
   }
