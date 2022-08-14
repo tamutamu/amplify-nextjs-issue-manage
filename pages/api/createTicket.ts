@@ -31,7 +31,7 @@ export default async function handler(
 
     const graphqlClient = new AWSAppSyncClient({
       url: graphql_endoint,
-      region: env.REGION!,
+      region: "ap-northeast-1",
       auth: graphql_auth!,
       disableOffline: true,
     });
