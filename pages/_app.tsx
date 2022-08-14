@@ -42,9 +42,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
   return (
     <ThemeProvider theme={theme}>
-      <Authenticator.Provider>
-        <Component {...pageProps} />
-      </Authenticator.Provider>
+      <Authenticator>
+        <Authenticator.Provider>
+          <Component {...pageProps} />
+        </Authenticator.Provider>
+      </Authenticator>
     </ThemeProvider>
   );
 }
