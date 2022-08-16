@@ -7,7 +7,7 @@ import { ListTicketsQuery, Ticket } from "../src/API";
 import { listTickets } from "../src/graphql/queries";
 import styles from "../styles/Home.module.css";
 
-const Home: NextPage = () => {
+const Index: NextPage = () => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   useEffect(() => {
     fetchTickets();
@@ -74,4 +74,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Index;

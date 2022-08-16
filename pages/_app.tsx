@@ -21,12 +21,21 @@ I18n.setLanguage("ja");
 
 const NoSSR = dynamic(() => import("../components/NoSSR"), {});
 
-function Authcheck() {
+const App = ({ Component, pageProps }: AppProps) => {
   const { route } = useAuthenticator((context) => [context.route]);
-  return route === "authenticated" ? <></> : <></>;
-}
+  return (
+    <>
+      {route === "authenticated" ? (
+        <Component {...pageProps} />
+      ) : (
+        // サインインページ
+        <Authenticator />
+      )}
+    </>
+  );
+};
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp(props: AppProps) {
   const theme = {
     name: "my-theme",
     tokens: {
@@ -40,13 +49,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       },
     },
   };
+
   return (
     <ThemeProvider theme={theme}>
-      <Authenticator>
-        <Authenticator.Provider>
-          <Component {...pageProps} />
-        </Authenticator.Provider>
-      </Authenticator>
+      <Authenticator.Provider>{<App {...props} />}</Authenticator.Provider>
     </ThemeProvider>
   );
 }
