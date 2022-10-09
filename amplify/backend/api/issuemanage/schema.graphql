@@ -1,29 +1,74 @@
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 #input AMPLIFY { globalAuthRule: AuthRule = { allow: public provider: iam operations: [read, create, update, delete] } } # FOR TESTING ONLY!
-enum TicketStatus {
+enum EnumTicketStatus {
   PENDING
   RUNNING
   COMPLETE
+}
+
+type Group
+  @model
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: owner, operations: [create, update, delete, read] }
+    ]
+  ) {
+  id: ID! @primaryKey
+  name: String!
+  users: [User] @manyToMany(relationName: "GroupUsers")
+}
+
+type User
+  @model
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: owner, operations: [create, update, delete, read] }
+    ]
+  ) {
+  id: ID! @primaryKey
+  name: String!
+  groups: [Group] @manyToMany(relationName: "GroupUsers")
+}
+
+type Project
+  @model
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: owner, operations: [create, update, delete, read] }
+    ]
+  ) {
+  id: ID! @primaryKey
+  name: String!
+  groups: [Group]
+  tickets: [Ticket] @hasMany
+}
+
+enum EnumCategory {
+  ISSUE
+  TASK
+  TODO
 }
 
 type Ticket
   @model
   @auth(
     rules: [
-      {
-        allow: private
-        provider: iam
-        operations: [create, update, delete, read]
-      }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: owner, operations: [create, update, delete, read] }
     ]
   ) {
   id: ID! @primaryKey
   title: String!
   content: String!
   coverImage: String
-  status: TicketStatus!
-  owner: String
+  status: EnumTicketStatus!
+  comments: [Comment] @hasMany
+  project: Project @belongsTo
+  category: EnumCategory!
   startDatetime: AWSDateTime
   endDatetime: AWSDateTime
 }
@@ -32,13 +77,11 @@ type Comment
   @model
   @auth(
     rules: [
-      {
-        allow: private
-        provider: iam
-        operations: [create, update, delete, read]
-      }
+      { allow: public, provider: iam, operations: [read] }
+      { allow: owner, operations: [create, update, delete, read] }
     ]
   ) {
   id: ID! @primaryKey
   content: String!
+  ticket: Ticket @belongsTo
 }

@@ -15,12 +15,6 @@
     "categories": {
       "auth": {
         "issuemanage3ff722e2": {}
-      },
-      "function": {
-        "issuemanagedf932920": {
-          "deploymentBucketName": "amplify-issuemanage-develop-13415-deployment",
-          "s3Key": "amplify-builds/issuemanagedf932920-2b396b33322b4d484d63-build.zip"
-        }
       }
     }
   }
