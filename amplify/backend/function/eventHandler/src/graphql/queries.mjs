@@ -57,9 +57,9 @@ export const getGroup = /* GraphQL */ `
       id
       userId
       name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -84,9 +84,9 @@ export const listGroups = /* GraphQL */ `
         id
         userId
         name
-        owner
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -98,9 +98,9 @@ export const getUser = /* GraphQL */ `
       id
       groupId
       name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -125,9 +125,9 @@ export const listUsers = /* GraphQL */ `
         id
         groupId
         name
-        owner
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -139,9 +139,9 @@ export const getProject = /* GraphQL */ `
       id
       name
       groupIds
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -164,9 +164,9 @@ export const listProjects = /* GraphQL */ `
         id
         name
         groupIds
-        owner
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -184,9 +184,9 @@ export const getTicket = /* GraphQL */ `
       category
       startDatetime
       endDatetime
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -215,9 +215,9 @@ export const listTickets = /* GraphQL */ `
         category
         startDatetime
         endDatetime
-        owner
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -230,9 +230,9 @@ export const getComment = /* GraphQL */ `
       content
       Ticket_id
       User_name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -256,9 +256,9 @@ export const listComments = /* GraphQL */ `
         content
         Ticket_id
         User_name
-        owner
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

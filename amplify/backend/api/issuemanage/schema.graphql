@@ -1,6 +1,39 @@
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 #input AMPLIFY { globalAuthRule: AuthRule = { allow: public provider: iam operations: [read, create, update, delete] } } # FOR TESTING ONLY!
+type Event {
+  type: String!
+  args: String!
+}
+
+enum EventStoreStatus {
+  PENDING
+  RUNNING
+  COMPLETE
+}
+
+enum EventStoreResultStatus {
+  SUCCESS
+  FAILED
+  ERROR
+}
+
+type EventStore
+  @model
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: owner, operations: [create, update, delete, read] }
+    ]
+  ) {
+  id: ID! @primaryKey
+  seq: Int!
+  event: Event
+  status: EventStoreStatus
+  resultStatus: EventStoreStatus
+  owner: String
+}
+
 enum EnumTicketStatus {
   PENDING
   RUNNING
@@ -15,9 +48,10 @@ type Group
       { allow: owner, operations: [create, update, delete, read] }
     ]
   ) {
-  id: ID! @primaryKey
+  id: ID! @primaryKey(sortKeyFields: ["userId"])
+  userId: String!
   name: String!
-  users: [User] @manyToMany(relationName: "GroupUsers")
+  owner: String
 }
 
 type User
@@ -28,9 +62,10 @@ type User
       { allow: owner, operations: [create, update, delete, read] }
     ]
   ) {
-  id: ID! @primaryKey
+  id: ID! @primaryKey(sortKeyFields: ["groupId"])
+  groupId: String!
   name: String!
-  groups: [Group] @manyToMany(relationName: "GroupUsers")
+  owner: String
 }
 
 type Project
@@ -43,8 +78,8 @@ type Project
   ) {
   id: ID! @primaryKey
   name: String!
-  groups: [Group]
-  tickets: [Ticket] @hasMany
+  groupIds: [String]
+  owner: String
 }
 
 enum EnumCategory {
@@ -66,11 +101,11 @@ type Ticket
   content: String!
   coverImage: String
   status: EnumTicketStatus!
-  comments: [Comment] @hasMany
-  project: Project @belongsTo
+  Project_id: String!
   category: EnumCategory!
   startDatetime: AWSDateTime
   endDatetime: AWSDateTime
+  owner: String
 }
 
 type Comment
@@ -83,5 +118,25 @@ type Comment
   ) {
   id: ID! @primaryKey
   content: String!
-  ticket: Ticket @belongsTo
+  Ticket_id: String!
+  User_name: String!
+  owner: String
+}
+
+type Counter
+  @model
+  @auth(
+    rules: [
+      { allow: public, provider: iam, operations: [read] }
+      { allow: owner, operations: [create, update, delete, read] }
+    ]
+  ) {
+  id: ID! @primaryKey
+  count: Int!
+  owner: String
+}
+
+type Mutation {
+  incrementCount(id: String): Int
+    @auth(rules: [{ allow: public, provider: iam }])
 }

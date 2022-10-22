@@ -1,25 +1,33 @@
-import { withAuthenticator } from "@aws-amplify/ui-react";
 import React, { useState, useRef } from "react";
-import { API, Storage } from "aws-amplify";
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { v4 as uuid } from "uuid";
-import { createTicket } from "../../src/graphql/mutations";
 import dynamic from "next/dynamic";
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 // import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
-import { CreateTicketInput, Ticket, TicketStatus } from "../../src/API";
+import {
+  CreateEventStoreMutation,
+  CreateEventStoreMutationVariables,
+  CreateTicketInput,
+  EnumCategory,
+  EnumTicketStatus,
+  Ticket,
+} from "../../src/API";
+import { createEventStore } from "../../src/graphql/mutations";
+import { API } from "aws-amplify";
 
-const initialState = { id: "", title: "", content: "", coverImage: "" };
-function CreatePost() {
+const CreatePost: NextPage = () => {
   const [ticket, setTicket] = useState<CreateTicketInput>({
+    id: uuid(),
     title: "",
     content: "",
-    status: TicketStatus.PENDING,
+    status: EnumTicketStatus.PENDING,
+    Project_id: "-1",
+    category: EnumCategory.ISSUE,
   });
-  const { title, content, status } = ticket as CreateTicketInput;
   const router = useRouter();
   const [image, setImage] = useState<File>();
   const imageFileInput = useRef<HTMLInputElement>(null);
@@ -32,33 +40,37 @@ function CreatePost() {
   }
 
   async function createNewTicket() {
-    if (!title || !content || !ticket) return;
+    // if (!title || !content || !ticket) return;
     // const id = uuid();
     // ticket.id = id;
 
     if (image) {
       const filename = `${image.name}_${uuid()}`;
-      ticket.coverImage = filename;
+      ticket!.coverImage = filename;
       //   await Storage.put(filename, image);
     }
 
-    // await API.graphql({
-    //   query: createTicket,
-    //   variables: { input: ticket },
-    //   authMode: "AMAZON_COGNITO_USER_POOLS",
-    // });
-    const ret = await fetch("/api/createTicket", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(ticket),
-    });
+    const res = (await API.graphql({
+      query: createEventStore,
+      variables: {
+        input: {
+          seq: 1,
+          event: {
+            type: "CreateTicket",
+            args: JSON.stringify(ticket),
+          },
+        },
+      } as CreateEventStoreMutationVariables,
+    })) as { data: CreateEventStoreMutation; errors: any[] };
+
+    console.log(res);
+
     router.push("/");
   }
   async function uploadImage() {
     imageFileInput.current?.click();
   }
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files != null) {
       const fileUploaded = e.target.files[0];
@@ -95,16 +107,18 @@ function CreatePost() {
       >
         Upload Cover Image
       </button>
-      <button
-        type="button"
-        className="mb-4 bg-blue-600 text-white 
+      <div>
+        <button
+          type="button"
+          className="mb-4 bg-blue-600 text-white 
      font-semibold px-8 py-2 rounded-lg"
-        onClick={createNewTicket}
-      >
-        Create Post
-      </button>{" "}
+          onClick={createNewTicket}
+        >
+          Create Post
+        </button>{" "}
+      </div>
     </div>
   );
-}
+};
 
-export default withAuthenticator(CreatePost);
+export default CreatePost;

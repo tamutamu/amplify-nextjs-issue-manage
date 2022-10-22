@@ -2,45 +2,66 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateEventStore = /* GraphQL */ `
+  subscription OnCreateEventStore($owner: String) {
+    onCreateEventStore(owner: $owner) {
+      id
+      seq
+      event {
+        type
+        args
+      }
+      status
+      resultStatus
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEventStore = /* GraphQL */ `
+  subscription OnUpdateEventStore($owner: String) {
+    onUpdateEventStore(owner: $owner) {
+      id
+      seq
+      event {
+        type
+        args
+      }
+      status
+      resultStatus
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEventStore = /* GraphQL */ `
+  subscription OnDeleteEventStore($owner: String) {
+    onDeleteEventStore(owner: $owner) {
+      id
+      seq
+      event {
+        type
+        args
+      }
+      status
+      resultStatus
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateGroup = /* GraphQL */ `
   subscription OnCreateGroup($owner: String) {
     onCreateGroup(owner: $owner) {
       id
+      userId
       name
-      users {
-        items {
-          id
-          groupID
-          userID
-          group {
-            id
-            name
-            users {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          user {
-            id
-            name
-            groups {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -48,41 +69,11 @@ export const onUpdateGroup = /* GraphQL */ `
   subscription OnUpdateGroup($owner: String) {
     onUpdateGroup(owner: $owner) {
       id
+      userId
       name
-      users {
-        items {
-          id
-          groupID
-          userID
-          group {
-            id
-            name
-            users {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          user {
-            id
-            name
-            groups {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -90,41 +81,11 @@ export const onDeleteGroup = /* GraphQL */ `
   subscription OnDeleteGroup($owner: String) {
     onDeleteGroup(owner: $owner) {
       id
+      userId
       name
-      users {
-        items {
-          id
-          groupID
-          userID
-          group {
-            id
-            name
-            users {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          user {
-            id
-            name
-            groups {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -132,41 +93,11 @@ export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($owner: String) {
     onCreateUser(owner: $owner) {
       id
+      groupId
       name
-      groups {
-        items {
-          id
-          groupID
-          userID
-          group {
-            id
-            name
-            users {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          user {
-            id
-            name
-            groups {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -174,41 +105,11 @@ export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser($owner: String) {
     onUpdateUser(owner: $owner) {
       id
+      groupId
       name
-      groups {
-        items {
-          id
-          groupID
-          userID
-          group {
-            id
-            name
-            users {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          user {
-            id
-            name
-            groups {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -216,41 +117,11 @@ export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser($owner: String) {
     onDeleteUser(owner: $owner) {
       id
+      groupId
       name
-      groups {
-        items {
-          id
-          groupID
-          userID
-          group {
-            id
-            name
-            users {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          user {
-            id
-            name
-            groups {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -259,86 +130,10 @@ export const onCreateProject = /* GraphQL */ `
     onCreateProject(owner: $owner) {
       id
       name
-      groups {
-        id
-        name
-        users {
-          items {
-            id
-            groupID
-            userID
-            group {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            user {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      tickets {
-        items {
-          id
-          title
-          content
-          coverImage
-          status
-          comments {
-            items {
-              id
-              content
-              createdAt
-              updatedAt
-              ticketCommentsId
-              owner
-            }
-            nextToken
-          }
-          project {
-            id
-            name
-            groups {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            tickets {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          category
-          startDatetime
-          endDatetime
-          createdAt
-          updatedAt
-          projectTicketsId
-          owner
-        }
-        nextToken
-      }
+      groupIds
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -347,86 +142,10 @@ export const onUpdateProject = /* GraphQL */ `
     onUpdateProject(owner: $owner) {
       id
       name
-      groups {
-        id
-        name
-        users {
-          items {
-            id
-            groupID
-            userID
-            group {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            user {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      tickets {
-        items {
-          id
-          title
-          content
-          coverImage
-          status
-          comments {
-            items {
-              id
-              content
-              createdAt
-              updatedAt
-              ticketCommentsId
-              owner
-            }
-            nextToken
-          }
-          project {
-            id
-            name
-            groups {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            tickets {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          category
-          startDatetime
-          endDatetime
-          createdAt
-          updatedAt
-          projectTicketsId
-          owner
-        }
-        nextToken
-      }
+      groupIds
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -435,86 +154,10 @@ export const onDeleteProject = /* GraphQL */ `
     onDeleteProject(owner: $owner) {
       id
       name
-      groups {
-        id
-        name
-        users {
-          items {
-            id
-            groupID
-            userID
-            group {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            user {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      tickets {
-        items {
-          id
-          title
-          content
-          coverImage
-          status
-          comments {
-            items {
-              id
-              content
-              createdAt
-              updatedAt
-              ticketCommentsId
-              owner
-            }
-            nextToken
-          }
-          project {
-            id
-            name
-            groups {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            tickets {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          category
-          startDatetime
-          endDatetime
-          createdAt
-          updatedAt
-          projectTicketsId
-          owner
-        }
-        nextToken
-      }
+      groupIds
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -526,100 +169,13 @@ export const onCreateTicket = /* GraphQL */ `
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          ticket {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            project {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            category
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            projectTicketsId
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
-      project {
-        id
-        name
-        groups {
-          id
-          name
-          users {
-            items {
-              id
-              groupID
-              userID
-              createdAt
-              updatedAt
-              owner
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        tickets {
-          items {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            project {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            category
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            projectTicketsId
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      Project_id
       category
       startDatetime
       endDatetime
+      owner
       createdAt
       updatedAt
-      projectTicketsId
-      owner
     }
   }
 `;
@@ -631,100 +187,13 @@ export const onUpdateTicket = /* GraphQL */ `
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          ticket {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            project {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            category
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            projectTicketsId
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
-      project {
-        id
-        name
-        groups {
-          id
-          name
-          users {
-            items {
-              id
-              groupID
-              userID
-              createdAt
-              updatedAt
-              owner
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        tickets {
-          items {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            project {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            category
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            projectTicketsId
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      Project_id
       category
       startDatetime
       endDatetime
+      owner
       createdAt
       updatedAt
-      projectTicketsId
-      owner
     }
   }
 `;
@@ -736,100 +205,13 @@ export const onDeleteTicket = /* GraphQL */ `
       content
       coverImage
       status
-      comments {
-        items {
-          id
-          content
-          ticket {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            project {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            category
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            projectTicketsId
-            owner
-          }
-          createdAt
-          updatedAt
-          ticketCommentsId
-          owner
-        }
-        nextToken
-      }
-      project {
-        id
-        name
-        groups {
-          id
-          name
-          users {
-            items {
-              id
-              groupID
-              userID
-              createdAt
-              updatedAt
-              owner
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        tickets {
-          items {
-            id
-            title
-            content
-            coverImage
-            status
-            comments {
-              nextToken
-            }
-            project {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            category
-            startDatetime
-            endDatetime
-            createdAt
-            updatedAt
-            projectTicketsId
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
+      Project_id
       category
       startDatetime
       endDatetime
+      owner
       createdAt
       updatedAt
-      projectTicketsId
-      owner
     }
   }
 `;
@@ -838,83 +220,11 @@ export const onCreateComment = /* GraphQL */ `
     onCreateComment(owner: $owner) {
       id
       content
-      ticket {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            ticket {
-              id
-              title
-              content
-              coverImage
-              status
-              category
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              projectTicketsId
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        project {
-          id
-          name
-          groups {
-            id
-            name
-            users {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          tickets {
-            items {
-              id
-              title
-              content
-              coverImage
-              status
-              category
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              projectTicketsId
-              owner
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        category
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        projectTicketsId
-        owner
-      }
+      Ticket_id
+      User_name
+      owner
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
     }
   }
 `;
@@ -923,83 +233,11 @@ export const onUpdateComment = /* GraphQL */ `
     onUpdateComment(owner: $owner) {
       id
       content
-      ticket {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            ticket {
-              id
-              title
-              content
-              coverImage
-              status
-              category
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              projectTicketsId
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        project {
-          id
-          name
-          groups {
-            id
-            name
-            users {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          tickets {
-            items {
-              id
-              title
-              content
-              coverImage
-              status
-              category
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              projectTicketsId
-              owner
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        category
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        projectTicketsId
-        owner
-      }
+      Ticket_id
+      User_name
+      owner
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
     }
   }
 `;
@@ -1008,311 +246,11 @@ export const onDeleteComment = /* GraphQL */ `
     onDeleteComment(owner: $owner) {
       id
       content
-      ticket {
-        id
-        title
-        content
-        coverImage
-        status
-        comments {
-          items {
-            id
-            content
-            ticket {
-              id
-              title
-              content
-              coverImage
-              status
-              category
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              projectTicketsId
-              owner
-            }
-            createdAt
-            updatedAt
-            ticketCommentsId
-            owner
-          }
-          nextToken
-        }
-        project {
-          id
-          name
-          groups {
-            id
-            name
-            users {
-              nextToken
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          tickets {
-            items {
-              id
-              title
-              content
-              coverImage
-              status
-              category
-              startDatetime
-              endDatetime
-              createdAt
-              updatedAt
-              projectTicketsId
-              owner
-            }
-            nextToken
-          }
-          createdAt
-          updatedAt
-          owner
-        }
-        category
-        startDatetime
-        endDatetime
-        createdAt
-        updatedAt
-        projectTicketsId
-        owner
-      }
+      Ticket_id
+      User_name
+      owner
       createdAt
       updatedAt
-      ticketCommentsId
-      owner
-    }
-  }
-`;
-export const onCreateGroupUsers = /* GraphQL */ `
-  subscription OnCreateGroupUsers($owner: String) {
-    onCreateGroupUsers(owner: $owner) {
-      id
-      groupID
-      userID
-      group {
-        id
-        name
-        users {
-          items {
-            id
-            groupID
-            userID
-            group {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            user {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      user {
-        id
-        name
-        groups {
-          items {
-            id
-            groupID
-            userID
-            group {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            user {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateGroupUsers = /* GraphQL */ `
-  subscription OnUpdateGroupUsers($owner: String) {
-    onUpdateGroupUsers(owner: $owner) {
-      id
-      groupID
-      userID
-      group {
-        id
-        name
-        users {
-          items {
-            id
-            groupID
-            userID
-            group {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            user {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      user {
-        id
-        name
-        groups {
-          items {
-            id
-            groupID
-            userID
-            group {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            user {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteGroupUsers = /* GraphQL */ `
-  subscription OnDeleteGroupUsers($owner: String) {
-    onDeleteGroupUsers(owner: $owner) {
-      id
-      groupID
-      userID
-      group {
-        id
-        name
-        users {
-          items {
-            id
-            groupID
-            userID
-            group {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            user {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      user {
-        id
-        name
-        groups {
-          items {
-            id
-            groupID
-            userID
-            group {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            user {
-              id
-              name
-              createdAt
-              updatedAt
-              owner
-            }
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;

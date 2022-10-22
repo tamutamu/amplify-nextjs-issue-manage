@@ -3,13 +3,15 @@ import {
   ThemeProvider,
   useAuthenticator,
 } from "@aws-amplify/ui-react";
+import "../styles/globals.css";
 import "@aws-amplify/ui-react/styles.css";
-import { Amplify, I18n } from "aws-amplify";
+import { Amplify, API, I18n, graphqlOperation, Auth } from "aws-amplify";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import config from "../src/aws-exports";
-import "../styles/globals.css";
 import { translations } from "@aws-amplify/ui";
+import { useEffect } from "react";
+import { eventSubscriber } from "../src/lib/eventStoreUtil";
 
 Amplify.configure({ ...config, ssr: true });
 
@@ -21,14 +23,23 @@ I18n.setLanguage("ja");
 
 const NoSSR = dynamic(() => import("../components/NoSSR"), {});
 
-const App = ({ Component, pageProps }: AppProps) => {
-  const { route } = useAuthenticator((context) => [context.route]);
+const _MyApp = ({ Component, pageProps }: AppProps) => {
+  const { user, signOut, route } = useAuthenticator((context) => [
+    context.user,
+    context.route,
+  ]);
+
+  useEffect(() => {
+    if (user) {
+      return eventSubscriber(() => console.log("sub triggerd"), user);
+    }
+  }, []);
+
   return (
     <>
       {route === "authenticated" ? (
         <Component {...pageProps} />
       ) : (
-        // サインインページ
         <Authenticator />
       )}
     </>
@@ -36,23 +47,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 };
 
 function MyApp(props: AppProps) {
-  const theme = {
-    name: "my-theme",
-    tokens: {
-      colors: {
-        font: {
-          primary: { value: "#008080" },
-        },
-        background: {
-          primary: { value: "#f4f5f5" },
-        },
-      },
-    },
-  };
-
   return (
-    <ThemeProvider theme={theme}>
-      <Authenticator.Provider>{<App {...props} />}</Authenticator.Provider>
+    <ThemeProvider>
+      <Authenticator.Provider>{<_MyApp {...props} />}</Authenticator.Provider>
     </ThemeProvider>
   );
 }

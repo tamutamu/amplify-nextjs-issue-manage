@@ -1,3 +1,4 @@
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import { API, Auth } from "aws-amplify";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -5,12 +6,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ListTicketsQuery, Ticket } from "../src/API";
 import { listTickets } from "../src/graphql/queries";
+import { eventSubscriber } from "../src/lib/eventStoreUtil";
 import styles from "../styles/Home.module.css";
 
 const Index: NextPage = () => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
+
+  const { user, signOut, route } = useAuthenticator((context) => [
+    context.user,
+    context.route,
+  ]);
+
   useEffect(() => {
     fetchTickets();
+    return eventSubscriber(fetchTickets, user);
   }, []);
 
   async function fetchTickets() {
@@ -18,6 +27,8 @@ const Index: NextPage = () => {
     const result = await API.graphql({
       query: listTickets,
     });
+
+    console.log(result);
 
     if ("data" in result && result.data) {
       const items = result.data as ListTicketsQuery;
@@ -45,7 +56,7 @@ const Index: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Manage issue</h1>
+        <h3 className="text-8xl text-purple-600">Manage issue</h3>
 
         {[
           ["Home", "/"],

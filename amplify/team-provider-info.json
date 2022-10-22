@@ -15,6 +15,16 @@
     "categories": {
       "auth": {
         "issuemanage3ff722e2": {}
+      },
+      "function": {
+        "eventHandler": {
+          "deploymentBucketName": "amplify-issuemanage-develop-13415-deployment",
+          "s3Key": "amplify-builds/eventHandler-6d7a6a302b4375462f51-build.zip"
+        },
+        "issuemanagelayer1985a1f2": {
+          "deploymentBucketName": "amplify-issuemanage-develop-13415-deployment",
+          "s3Key": "amplify-builds/issuemanagelayer1985a1f2-LambdaLayerVersiondcd39182-build.zip"
+        }
       }
     }
   }

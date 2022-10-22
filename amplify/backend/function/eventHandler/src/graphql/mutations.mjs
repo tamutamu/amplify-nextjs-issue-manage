@@ -71,9 +71,9 @@ export const createGroup = /* GraphQL */ `
       id
       userId
       name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -86,9 +86,9 @@ export const updateGroup = /* GraphQL */ `
       id
       userId
       name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -101,9 +101,9 @@ export const deleteGroup = /* GraphQL */ `
       id
       userId
       name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -116,9 +116,9 @@ export const createUser = /* GraphQL */ `
       id
       groupId
       name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -131,9 +131,9 @@ export const updateUser = /* GraphQL */ `
       id
       groupId
       name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -146,9 +146,9 @@ export const deleteUser = /* GraphQL */ `
       id
       groupId
       name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -161,9 +161,9 @@ export const createProject = /* GraphQL */ `
       id
       name
       groupIds
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -176,9 +176,9 @@ export const updateProject = /* GraphQL */ `
       id
       name
       groupIds
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -191,9 +191,9 @@ export const deleteProject = /* GraphQL */ `
       id
       name
       groupIds
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -212,9 +212,9 @@ export const createTicket = /* GraphQL */ `
       category
       startDatetime
       endDatetime
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -233,9 +233,9 @@ export const updateTicket = /* GraphQL */ `
       category
       startDatetime
       endDatetime
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -254,9 +254,9 @@ export const deleteTicket = /* GraphQL */ `
       category
       startDatetime
       endDatetime
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -270,9 +270,9 @@ export const createComment = /* GraphQL */ `
       content
       Ticket_id
       User_name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -286,9 +286,9 @@ export const updateComment = /* GraphQL */ `
       content
       Ticket_id
       User_name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -302,9 +302,9 @@ export const deleteComment = /* GraphQL */ `
       content
       Ticket_id
       User_name
-      owner
       createdAt
       updatedAt
+      owner
     }
   }
 `;

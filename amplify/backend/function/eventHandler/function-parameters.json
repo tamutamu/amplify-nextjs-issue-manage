@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "auth": {
+      "issuemanage3ff722e2": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "api": {
+      "issuemanage": [
+        "Query",
+        "Mutation"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "issuemanagelayer1985a1f2",
+      "env": "develop",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ]
+}
