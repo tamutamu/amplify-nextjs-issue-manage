@@ -72,7 +72,7 @@ export class cdkStack extends cdk.Stack {
       typeName: "Mutation", // Query | Mutation | Subscription
       requestMappingTemplate: requestVTL,
       responseMappingTemplate: responseVTL,
-      dataSourceName: "CounterDataSource", // DataSource name
+      dataSourceName: "CounterTable", // DataSource name
     });
     /* AWS CDK code goes here - learn more: https://docs.aws.amazon.com/cdk/latest/guide/home.html */
 
