@@ -138,5 +138,4 @@ type Counter
 
 type Mutation {
   incrementCount(id: String): Int
-    @auth(rules: [{ allow: public, provider: iam }])
 }
