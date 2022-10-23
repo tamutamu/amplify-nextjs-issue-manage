@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "amplify:eventHandler": "cp ./src/"
+    "lint": "next lint"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^3.4.0",
