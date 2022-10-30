@@ -254,3 +254,69 @@ export const onDeleteComment = /* GraphQL */ `
     }
   }
 `;
+export const onCreateCounter = /* GraphQL */ `
+  subscription OnCreateCounter($owner: String) {
+    onCreateCounter(owner: $owner) {
+      id
+      count
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCounter = /* GraphQL */ `
+  subscription OnUpdateCounter($owner: String) {
+    onUpdateCounter(owner: $owner) {
+      id
+      count
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCounter = /* GraphQL */ `
+  subscription OnDeleteCounter($owner: String) {
+    onDeleteCounter(owner: $owner) {
+      id
+      count
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateGroupLock = /* GraphQL */ `
+  subscription OnCreateGroupLock($owner: String) {
+    onCreateGroupLock(owner: $owner) {
+      groupId
+      eventId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateGroupLock = /* GraphQL */ `
+  subscription OnUpdateGroupLock($owner: String) {
+    onUpdateGroupLock(owner: $owner) {
+      groupId
+      eventId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteGroupLock = /* GraphQL */ `
+  subscription OnDeleteGroupLock($owner: String) {
+    onDeleteGroupLock(owner: $owner) {
+      groupId
+      eventId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

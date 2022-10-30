@@ -28,13 +28,17 @@
       "Type": "String",
       "Default": "apiissuemanageGraphQLAPIKeyOutput"
     },
+    "functioneventHandlerName": {
+      "Type": "String",
+      "Default": "functioneventHandlerName"
+    },
     "functionissuemanagelayer1985a1f2Arn": {
       "Type": "String",
       "Default": "functionissuemanagelayer1985a1f2Arn"
     },
-    "customeventQueueUrl": {
+    "customeventQueueArn": {
       "Type": "String",
-      "Default": "customeventQueueUrl"
+      "Default": "customeventQueueArn"
     }
   },
   "Conditions": {
@@ -67,12 +71,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "eventHandler",
+            "sendSqsMessage",
             {
               "Fn::Join": [
                 "",
                 [
-                  "eventHandler",
+                  "sendSqsMessage",
                   "-",
                   {
                     "Ref": "env"
@@ -87,9 +91,6 @@
             "ENV": {
               "Ref": "env"
             },
-            "CUSTOMEVENTQUEUEURL": {
-              "Ref": "customeventQueueUrl"
-            },
             "REGION": {
               "Ref": "AWS::Region"
             },
@@ -101,6 +102,9 @@
             },
             "API_ISSUEMANAGE_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apiissuemanageGraphQLAPIKeyOutput"
+            },
+            "FUNCTION_EVENTHANDLER_NAME": {
+              "Ref": "functioneventHandlerName"
             }
           }
         },
@@ -125,12 +129,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "amplifynextjsissuemaLambdaRolebadcdd6a",
+            "amplifynextjsissuemaLambdaRole1fa2b3f6",
             {
               "Fn::Join": [
                 "",
                 [
-                  "amplifynextjsissuemaLambdaRolebadcdd6a",
+                  "amplifynextjsissuemaLambdaRole1fa2b3f6",
                   "-",
                   {
                     "Ref": "env"
@@ -173,6 +177,14 @@
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:*"
+              ],
+              "Resource": "*"
+            },
             {
               "Effect": "Allow",
               "Action": [
@@ -219,13 +231,6 @@
             {
               "Effect": "Allow",
               "Action": [
-                "sqs:*"
-              ],
-              "Resource": "*"
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
                 "appsync:GraphQL"
               ],
               "Resource": [
@@ -245,15 +250,31 @@
                       {
                         "Ref": "apiissuemanageGraphQLAPIIdOutput"
                       },
-                      "/types/Query/*"
+                      "/*"
                     ]
                   ]
-                },
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "lambda:Create*",
+                "lambda:Put*",
+                "lambda:Add*",
+                "lambda:Get*",
+                "lambda:List*",
+                "lambda:Invoke*",
+                "lambda:Update*",
+                "lambda:Delete*",
+                "lambda:Remove*"
+              ],
+              "Resource": [
                 {
                   "Fn::Join": [
                     "",
                     [
-                      "arn:aws:appsync:",
+                      "arn:aws:lambda:",
                       {
                         "Ref": "AWS::Region"
                       },
@@ -261,11 +282,10 @@
                       {
                         "Ref": "AWS::AccountId"
                       },
-                      ":apis/",
+                      ":function:",
                       {
-                        "Ref": "apiissuemanageGraphQLAPIIdOutput"
-                      },
-                      "/types/Mutation/*"
+                        "Ref": "functioneventHandlerName"
+                      }
                     ]
                   ]
                 }
@@ -275,63 +295,23 @@
         }
       }
     },
-    "LambdaTriggerPolicyEventStore": {
+    "LambdaEventSourceMappingSqs": {
       "DependsOn": [
-        "LambdaExecutionRole"
+        "lambdaexecutionpolicy"
       ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy-EventStore",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:DescribeStream",
-                "dynamodb:GetRecords",
-                "dynamodb:GetShardIterator",
-                "dynamodb:ListStreams"
-              ],
-              "Resource": {
-                "Fn::ImportValue": {
-                  "Fn::Sub": "${apiissuemanageGraphQLAPIIdOutput}:GetAtt:EventStoreTable:StreamArn"
-                }
-              }
-            }
-          ]
-        }
-      }
-    },
-    "LambdaEventSourceMappingEventStore": {
       "Type": "AWS::Lambda::EventSourceMapping",
-      "DependsOn": [
-        "LambdaTriggerPolicyEventStore",
-        "LambdaExecutionRole"
-      ],
       "Properties": {
         "BatchSize": 1,
-        "MaximumBatchingWindowInSeconds": 20,
-        "MaximumRecordAgeInSeconds": 90,
-        "MaximumRetryAttempts": 3,
         "Enabled": true,
         "EventSourceArn": {
-          "Fn::ImportValue": {
-            "Fn::Sub": "${apiissuemanageGraphQLAPIIdOutput}:GetAtt:EventStoreTable:StreamArn"
-          }
+          "Ref": "customeventQueueArn"
         },
         "FunctionName": {
           "Fn::GetAtt": [
             "LambdaFunction",
             "Arn"
           ]
-        },
-        "StartingPosition": "LATEST"
+        }
       }
     }
   },
@@ -339,6 +319,11 @@
     "Name": {
       "Value": {
         "Ref": "LambdaFunction"
+      }
+    },
+    "EventUuid": {
+      "Value": {
+        "Ref": "LambdaEventSourceMappingSqs"
       }
     },
     "Arn": {

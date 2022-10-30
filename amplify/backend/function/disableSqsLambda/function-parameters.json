@@ -1,9 +1,11 @@
 {
   "permissions": {
-    "api": {
-      "issuemanage": [
-        "Query",
-        "Mutation"
+    "function": {
+      "sendSqsMessage": [
+        "create",
+        "read",
+        "update",
+        "delete"
       ]
     }
   },

@@ -24,7 +24,6 @@ export enum EventStoreStatus {
 
 
 export type ModelEventStoreConditionInput = {
-  seq?: ModelIntInput | null,
   status?: ModelEventStoreStatusInput | null,
   resultStatus?: ModelEventStoreStatusInput | null,
   owner?: ModelStringInput | null,
@@ -32,32 +31,6 @@ export type ModelEventStoreConditionInput = {
   or?: Array< ModelEventStoreConditionInput | null > | null,
   not?: ModelEventStoreConditionInput | null,
 };
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
 
 export type ModelEventStoreStatusInput = {
   eq?: EventStoreStatus | null,
@@ -79,6 +52,20 @@ export type ModelStringInput = {
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
 };
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
 
 export type ModelSizeInput = {
   ne?: number | null,
@@ -110,7 +97,7 @@ export type Event = {
 
 export type UpdateEventStoreInput = {
   id: string,
-  seq?: number | null,
+  seq: number,
   event?: EventInput | null,
   status?: EventStoreStatus | null,
   resultStatus?: EventStoreStatus | null,
@@ -119,6 +106,7 @@ export type UpdateEventStoreInput = {
 
 export type DeleteEventStoreInput = {
   id: string,
+  seq: number,
 };
 
 export type CreateGroupInput = {
@@ -358,6 +346,90 @@ export type DeleteCommentInput = {
   id: string,
 };
 
+export type CreateCounterInput = {
+  id?: string | null,
+  count: number,
+  owner?: string | null,
+};
+
+export type ModelCounterConditionInput = {
+  count?: ModelIntInput | null,
+  owner?: ModelStringInput | null,
+  and?: Array< ModelCounterConditionInput | null > | null,
+  or?: Array< ModelCounterConditionInput | null > | null,
+  not?: ModelCounterConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Counter = {
+  __typename: "Counter",
+  id: string,
+  count: number,
+  owner?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateCounterInput = {
+  id: string,
+  count?: number | null,
+  owner?: string | null,
+};
+
+export type DeleteCounterInput = {
+  id: string,
+};
+
+export type CreateGroupLockInput = {
+  groupId: string,
+  eventId: string,
+};
+
+export type ModelGroupLockConditionInput = {
+  and?: Array< ModelGroupLockConditionInput | null > | null,
+  or?: Array< ModelGroupLockConditionInput | null > | null,
+  not?: ModelGroupLockConditionInput | null,
+};
+
+export type GroupLock = {
+  __typename: "GroupLock",
+  groupId: string,
+  eventId: string,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateGroupLockInput = {
+  groupId: string,
+  eventId: string,
+};
+
+export type DeleteGroupLockInput = {
+  groupId: string,
+  eventId: string,
+};
+
+export type ModelIntKeyConditionInput = {
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
 export type ModelEventStoreFilterInput = {
   id?: ModelIDInput | null,
   seq?: ModelIntInput | null,
@@ -492,6 +564,43 @@ export type ModelCommentConnection = {
   __typename: "ModelCommentConnection",
   items:  Array<Comment | null >,
   nextToken?: string | null,
+};
+
+export type ModelCounterFilterInput = {
+  id?: ModelIDInput | null,
+  count?: ModelIntInput | null,
+  owner?: ModelStringInput | null,
+  and?: Array< ModelCounterFilterInput | null > | null,
+  or?: Array< ModelCounterFilterInput | null > | null,
+  not?: ModelCounterFilterInput | null,
+};
+
+export type ModelCounterConnection = {
+  __typename: "ModelCounterConnection",
+  items:  Array<Counter | null >,
+  nextToken?: string | null,
+};
+
+export type ModelGroupLockFilterInput = {
+  groupId?: ModelIDInput | null,
+  eventId?: ModelStringInput | null,
+  and?: Array< ModelGroupLockFilterInput | null > | null,
+  or?: Array< ModelGroupLockFilterInput | null > | null,
+  not?: ModelGroupLockFilterInput | null,
+};
+
+export type ModelGroupLockConnection = {
+  __typename: "ModelGroupLockConnection",
+  items:  Array<GroupLock | null >,
+  nextToken?: string | null,
+};
+
+export type IncrementCountMutationVariables = {
+  id?: string | null,
+};
+
+export type IncrementCountMutation = {
+  incrementCount?: number | null,
 };
 
 export type CreateEventStoreMutationVariables = {
@@ -839,8 +948,105 @@ export type DeleteCommentMutation = {
   } | null,
 };
 
+export type CreateCounterMutationVariables = {
+  input: CreateCounterInput,
+  condition?: ModelCounterConditionInput | null,
+};
+
+export type CreateCounterMutation = {
+  createCounter?:  {
+    __typename: "Counter",
+    id: string,
+    count: number,
+    owner?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateCounterMutationVariables = {
+  input: UpdateCounterInput,
+  condition?: ModelCounterConditionInput | null,
+};
+
+export type UpdateCounterMutation = {
+  updateCounter?:  {
+    __typename: "Counter",
+    id: string,
+    count: number,
+    owner?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteCounterMutationVariables = {
+  input: DeleteCounterInput,
+  condition?: ModelCounterConditionInput | null,
+};
+
+export type DeleteCounterMutation = {
+  deleteCounter?:  {
+    __typename: "Counter",
+    id: string,
+    count: number,
+    owner?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateGroupLockMutationVariables = {
+  input: CreateGroupLockInput,
+  condition?: ModelGroupLockConditionInput | null,
+};
+
+export type CreateGroupLockMutation = {
+  createGroupLock?:  {
+    __typename: "GroupLock",
+    groupId: string,
+    eventId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateGroupLockMutationVariables = {
+  input: UpdateGroupLockInput,
+  condition?: ModelGroupLockConditionInput | null,
+};
+
+export type UpdateGroupLockMutation = {
+  updateGroupLock?:  {
+    __typename: "GroupLock",
+    groupId: string,
+    eventId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteGroupLockMutationVariables = {
+  input: DeleteGroupLockInput,
+  condition?: ModelGroupLockConditionInput | null,
+};
+
+export type DeleteGroupLockMutation = {
+  deleteGroupLock?:  {
+    __typename: "GroupLock",
+    groupId: string,
+    eventId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
 export type GetEventStoreQueryVariables = {
   id: string,
+  seq: number,
 };
 
 export type GetEventStoreQuery = {
@@ -863,6 +1069,7 @@ export type GetEventStoreQuery = {
 
 export type ListEventStoresQueryVariables = {
   id?: string | null,
+  seq?: ModelIntKeyConditionInput | null,
   filter?: ModelEventStoreFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
@@ -1104,6 +1311,84 @@ export type ListCommentsQuery = {
       owner?: string | null,
       createdAt: string,
       updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetCounterQueryVariables = {
+  id: string,
+};
+
+export type GetCounterQuery = {
+  getCounter?:  {
+    __typename: "Counter",
+    id: string,
+    count: number,
+    owner?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListCountersQueryVariables = {
+  id?: string | null,
+  filter?: ModelCounterFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListCountersQuery = {
+  listCounters?:  {
+    __typename: "ModelCounterConnection",
+    items:  Array< {
+      __typename: "Counter",
+      id: string,
+      count: number,
+      owner?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetGroupLockQueryVariables = {
+  groupId: string,
+  eventId: string,
+};
+
+export type GetGroupLockQuery = {
+  getGroupLock?:  {
+    __typename: "GroupLock",
+    groupId: string,
+    eventId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListGroupLocksQueryVariables = {
+  groupId?: string | null,
+  eventId?: ModelStringKeyConditionInput | null,
+  filter?: ModelGroupLockFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListGroupLocksQuery = {
+  listGroupLocks?:  {
+    __typename: "ModelGroupLockConnection",
+    items:  Array< {
+      __typename: "GroupLock",
+      groupId: string,
+      eventId: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1433,5 +1718,95 @@ export type OnDeleteCommentSubscription = {
     owner?: string | null,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type OnCreateCounterSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateCounterSubscription = {
+  onCreateCounter?:  {
+    __typename: "Counter",
+    id: string,
+    count: number,
+    owner?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateCounterSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateCounterSubscription = {
+  onUpdateCounter?:  {
+    __typename: "Counter",
+    id: string,
+    count: number,
+    owner?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteCounterSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteCounterSubscription = {
+  onDeleteCounter?:  {
+    __typename: "Counter",
+    id: string,
+    count: number,
+    owner?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateGroupLockSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateGroupLockSubscription = {
+  onCreateGroupLock?:  {
+    __typename: "GroupLock",
+    groupId: string,
+    eventId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateGroupLockSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateGroupLockSubscription = {
+  onUpdateGroupLock?:  {
+    __typename: "GroupLock",
+    groupId: string,
+    eventId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteGroupLockSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteGroupLockSubscription = {
+  onDeleteGroupLock?:  {
+    __typename: "GroupLock",
+    groupId: string,
+    eventId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
   } | null,
 };

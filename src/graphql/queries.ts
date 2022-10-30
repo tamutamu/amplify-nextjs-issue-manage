@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const getEventStore = /* GraphQL */ `
-  query GetEventStore($id: ID!) {
-    getEventStore(id: $id) {
+  query GetEventStore($id: ID!, $seq: Int!) {
+    getEventStore(id: $id, seq: $seq) {
       id
       seq
       event {
@@ -22,6 +22,7 @@ export const getEventStore = /* GraphQL */ `
 export const listEventStores = /* GraphQL */ `
   query ListEventStores(
     $id: ID
+    $seq: ModelIntKeyConditionInput
     $filter: ModelEventStoreFilterInput
     $limit: Int
     $nextToken: String
@@ -29,6 +30,7 @@ export const listEventStores = /* GraphQL */ `
   ) {
     listEventStores(
       id: $id
+      seq: $seq
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -259,6 +261,82 @@ export const listComments = /* GraphQL */ `
         owner
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getCounter = /* GraphQL */ `
+  query GetCounter($id: ID!) {
+    getCounter(id: $id) {
+      id
+      count
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCounters = /* GraphQL */ `
+  query ListCounters(
+    $id: ID
+    $filter: ModelCounterFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listCounters(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        count
+        owner
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getGroupLock = /* GraphQL */ `
+  query GetGroupLock($groupId: ID!, $eventId: String!) {
+    getGroupLock(groupId: $groupId, eventId: $eventId) {
+      groupId
+      eventId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listGroupLocks = /* GraphQL */ `
+  query ListGroupLocks(
+    $groupId: ID
+    $eventId: ModelStringKeyConditionInput
+    $filter: ModelGroupLockFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listGroupLocks(
+      groupId: $groupId
+      eventId: $eventId
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        groupId
+        eventId
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }

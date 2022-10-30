@@ -22,11 +22,11 @@ type EventStore
   @model
   @auth(
     rules: [
-      { allow: public, provider: iam, operations: [read] }
+      { allow: private, provider: iam, operations: [read] }
       { allow: owner, operations: [create, update, delete, read] }
     ]
   ) {
-  id: ID! @primaryKey
+  id: ID! @primaryKey(sortKeyFields: ["seq"])
   seq: Int!
   event: Event
   status: EventStoreStatus
@@ -92,7 +92,11 @@ type Ticket
   @model
   @auth(
     rules: [
-      { allow: public, provider: iam, operations: [read] }
+      {
+        allow: private
+        provider: iam
+        operations: [create, update, delete, read]
+      }
       { allow: owner, operations: [create, update, delete, read] }
     ]
   ) {
@@ -134,6 +138,22 @@ type Counter
   id: ID! @primaryKey
   count: Int!
   owner: String
+}
+
+type GroupLock
+  @model
+  @auth(
+    rules: [
+      {
+        allow: private
+        provider: iam
+        operations: [create, update, delete, read]
+      }
+      { allow: owner, operations: [create, update, delete, read] }
+    ]
+  ) {
+  groupId: ID! @primaryKey(sortKeyFields: ["eventId"])
+  eventId: String!
 }
 
 type Mutation {

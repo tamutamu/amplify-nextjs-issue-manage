@@ -64,33 +64,16 @@
     }
   },
   "function": {
+    "issuemanagelayer1985a1f2": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    },
     "eventHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "issuemanagelayer1985a1f2",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "issuemanage",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
-        },
-        {
-          "category": "auth",
-          "resourceName": "issuemanage3ff722e2",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
         {
           "category": "api",
           "resourceName": "issuemanage",
@@ -99,13 +82,88 @@
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
           ]
+        },
+        {
+          "category": "custom",
+          "resourceName": "eventQueue",
+          "attributes": [
+            "Url"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "issuemanagelayer1985a1f2",
+          "attributes": [
+            "Arn"
+          ]
         }
       ]
     },
-    "issuemanagelayer1985a1f2": {
+    "sendSqsMessage": {
+      "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "issuemanage",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "eventHandler",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "custom",
+          "resourceName": "eventQueue",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "issuemanagelayer1985a1f2",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "disableSqsLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "sendSqsMessage",
+          "attributes": [
+            "Name",
+            "EventUuid"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "issuemanagelayer1985a1f2",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "custom",
+          "resourceName": "eventQueue",
+          "attributes": [
+            "DlqArn"
+          ]
+        }
+      ]
     }
   },
   "custom": {
@@ -123,6 +181,10 @@
           ]
         }
       ]
+    },
+    "eventQueue": {
+      "service": "customCDK",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const getEventStore = /* GraphQL */ `
-  query GetEventStore($id: ID!) {
-    getEventStore(id: $id) {
+  query GetEventStore($id: ID!, $seq: Int!) {
+    getEventStore(id: $id, seq: $seq) {
       id
       seq
       event {
@@ -22,6 +22,7 @@ export const getEventStore = /* GraphQL */ `
 export const listEventStores = /* GraphQL */ `
   query ListEventStores(
     $id: ID
+    $seq: ModelIntKeyConditionInput
     $filter: ModelEventStoreFilterInput
     $limit: Int
     $nextToken: String
@@ -29,6 +30,7 @@ export const listEventStores = /* GraphQL */ `
   ) {
     listEventStores(
       id: $id
+      seq: $seq
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -57,9 +59,9 @@ export const getGroup = /* GraphQL */ `
       id
       userId
       name
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -84,9 +86,9 @@ export const listGroups = /* GraphQL */ `
         id
         userId
         name
+        owner
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -98,9 +100,9 @@ export const getUser = /* GraphQL */ `
       id
       groupId
       name
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -125,9 +127,9 @@ export const listUsers = /* GraphQL */ `
         id
         groupId
         name
+        owner
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -139,9 +141,9 @@ export const getProject = /* GraphQL */ `
       id
       name
       groupIds
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -164,9 +166,9 @@ export const listProjects = /* GraphQL */ `
         id
         name
         groupIds
+        owner
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -184,9 +186,9 @@ export const getTicket = /* GraphQL */ `
       category
       startDatetime
       endDatetime
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -215,9 +217,9 @@ export const listTickets = /* GraphQL */ `
         category
         startDatetime
         endDatetime
+        owner
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -230,9 +232,9 @@ export const getComment = /* GraphQL */ `
       content
       Ticket_id
       User_name
+      owner
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -256,9 +258,46 @@ export const listComments = /* GraphQL */ `
         content
         Ticket_id
         User_name
+        owner
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getCounter = /* GraphQL */ `
+  query GetCounter($id: ID!) {
+    getCounter(id: $id) {
+      id
+      count
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCounters = /* GraphQL */ `
+  query ListCounters(
+    $id: ID
+    $filter: ModelCounterFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listCounters(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        count
         owner
+        createdAt
+        updatedAt
       }
       nextToken
     }

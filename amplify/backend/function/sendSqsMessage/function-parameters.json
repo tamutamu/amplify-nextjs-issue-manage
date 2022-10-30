@@ -5,6 +5,14 @@
         "Query",
         "Mutation"
       ]
+    },
+    "function": {
+      "eventHandler": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
     }
   },
   "lambdaLayers": [

@@ -2,6 +2,11 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const incrementCount = /* GraphQL */ `
+  mutation IncrementCount($id: String) {
+    incrementCount(id: $id)
+  }
+`;
 export const createEventStore = /* GraphQL */ `
   mutation CreateEventStore(
     $input: CreateEventStoreInput!
@@ -305,6 +310,90 @@ export const deleteComment = /* GraphQL */ `
       owner
       createdAt
       updatedAt
+    }
+  }
+`;
+export const createCounter = /* GraphQL */ `
+  mutation CreateCounter(
+    $input: CreateCounterInput!
+    $condition: ModelCounterConditionInput
+  ) {
+    createCounter(input: $input, condition: $condition) {
+      id
+      count
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCounter = /* GraphQL */ `
+  mutation UpdateCounter(
+    $input: UpdateCounterInput!
+    $condition: ModelCounterConditionInput
+  ) {
+    updateCounter(input: $input, condition: $condition) {
+      id
+      count
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCounter = /* GraphQL */ `
+  mutation DeleteCounter(
+    $input: DeleteCounterInput!
+    $condition: ModelCounterConditionInput
+  ) {
+    deleteCounter(input: $input, condition: $condition) {
+      id
+      count
+      owner
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createGroupLock = /* GraphQL */ `
+  mutation CreateGroupLock(
+    $input: CreateGroupLockInput!
+    $condition: ModelGroupLockConditionInput
+  ) {
+    createGroupLock(input: $input, condition: $condition) {
+      groupId
+      eventId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateGroupLock = /* GraphQL */ `
+  mutation UpdateGroupLock(
+    $input: UpdateGroupLockInput!
+    $condition: ModelGroupLockConditionInput
+  ) {
+    updateGroupLock(input: $input, condition: $condition) {
+      groupId
+      eventId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteGroupLock = /* GraphQL */ `
+  mutation DeleteGroupLock(
+    $input: DeleteGroupLockInput!
+    $condition: ModelGroupLockConditionInput
+  ) {
+    deleteGroupLock(input: $input, condition: $condition) {
+      groupId
+      eventId
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
