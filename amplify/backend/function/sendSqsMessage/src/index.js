@@ -8,6 +8,10 @@
 Amplify Params - DO NOT EDIT */
 const AWS = require("aws-sdk");
 const SQS = new AWS.SQS({ apiVersion: "2012-11-05" });
+const lambda = new AWS.Lambda({
+  apiVersion: "2015-03-31",
+  region: "ap-northeast-1",
+});
 
 const AWSAppSyncClient = require("aws-appsync").default;
 const gql = require("graphql-tag");
@@ -34,11 +38,25 @@ const graphqlClient = new AWSAppSyncClient({
   disableOffline: true,
 });
 
+const forceStopSQSLambdaTriiger = async () => {
+  let params = {
+    FunctionName:
+      "arn:aws:lambda:ap-northeast-1:123141636675:function:disableSqsLambda-develop", //呼び出し先関数名
+    InvocationType: "RequestResponse", //同期
+    Payload: JSON.stringify({ test: 1 }), //パラメータ
+  };
+  const ret = await lambda.invoke(params).promise();
+
+  console.log(ret);
+};
+
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 exports.handler = async (event) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
+
+  await forceStopSQSLambdaTriiger();
 
   mGql = await import("./graphql/mutations.mjs");
 

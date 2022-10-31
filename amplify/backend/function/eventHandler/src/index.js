@@ -47,7 +47,7 @@ exports.handler = async (event) => {
 
     var params = {
       MessageDeduplicationId: eventData.id.S,
-      MessageGroupId: "SPC2",
+      MessageGroupId: "SPC4",
       MessageBody: JSON.stringify(eventData),
       QueueUrl: env.CUSTOMEVENTQUEUEURL,
       DelaySeconds: 0,

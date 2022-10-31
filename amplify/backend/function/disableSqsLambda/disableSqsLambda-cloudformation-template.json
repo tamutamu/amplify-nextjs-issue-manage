@@ -106,7 +106,7 @@
             "Ref": "functionissuemanagelayer1985a1f2Arn"
           }
         ],
-        "Timeout": 25
+        "Timeout": 60
       }
     },
     "LambdaExecutionRole": {

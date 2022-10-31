@@ -181,7 +181,8 @@
               "Effect": "Allow",
               "Action": [
                 "sqs:ReceiveMessage",
-                "sqs:*"
+                "sqs:*",
+                "lambda:*"
               ],
               "Resource": "*"
             },

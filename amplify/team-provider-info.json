@@ -18,19 +18,19 @@
       "function": {
         "issuemanagelayer1985a1f2": {
           "deploymentBucketName": "amplify-issuemanage-develop-123511-deployment",
-          "s3Key": "amplify-builds/issuemanagelayer1985a1f2-LambdaLayerVersion7002832d-build.zip"
+          "s3Key": "amplify-builds/issuemanagelayer1985a1f2-LambdaLayerVersion31e13a10-build.zip"
         },
         "eventHandler": {
           "deploymentBucketName": "amplify-issuemanage-develop-123511-deployment",
-          "s3Key": "amplify-builds/eventHandler-73616f396c525571594f-build.zip"
+          "s3Key": "amplify-builds/eventHandler-2b517a764241647a6434-build.zip"
         },
         "sendSqsMessage": {
           "deploymentBucketName": "amplify-issuemanage-develop-123511-deployment",
-          "s3Key": "amplify-builds/sendSqsMessage-4a69304a4b4c64675663-build.zip"
+          "s3Key": "amplify-builds/sendSqsMessage-315862765a7869504568-build.zip"
         },
         "disableSqsLambda": {
           "deploymentBucketName": "amplify-issuemanage-develop-123511-deployment",
-          "s3Key": "amplify-builds/disableSqsLambda-78323552684b3942396b-build.zip"
+          "s3Key": "amplify-builds/disableSqsLambda-332f5847667949612b76-build.zip"
         }
       }
     }

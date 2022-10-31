@@ -10,6 +10,8 @@ const lambda = new AWS.Lambda({
   region: "ap-northeast-1",
 });
 
+const sleep = (msec) => new Promise((resolve) => setTimeout(resolve, msec));
+
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
@@ -22,6 +24,20 @@ exports.handler = async (event) => {
       Enabled: false,
     })
     .promise();
+
+  await sleep(3000);
+
+  while (true) {
+    const ret2 = await lambda.getEventSourceMapping({
+      UUID: process.env.EventUUID,
+    });
+
+    console.log(ret2);
+
+    if (ret2.State === "Disabled") {
+      break;
+    }
+  }
 
   console.log(ret);
 
